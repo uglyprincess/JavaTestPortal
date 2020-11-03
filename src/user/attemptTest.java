@@ -18,10 +18,11 @@ public class attemptTest extends JFrame implements ActionListener{
 	static ArrayList<String> questions = new ArrayList<String>();
 	static ArrayList<String> options = new ArrayList<String>();
 	static String[] responses;
+	static Vector <String> type;
 //	static ArrayList<String> responses = new ArrayList<String>();
 	public static int length =0;
 	static int num;
-	int i;
+	int i,timei;
 	String line;
 	
 	JLabel label, questionLabel;
@@ -36,7 +37,9 @@ public class attemptTest extends JFrame implements ActionListener{
 	private JLabel question;
 	JRadioButton A,B,C,D;
 	ButtonGroup group;
-	public static JLabel time;
+	public JLabel time;
+	public JLabel qtype;
+	Timer timer;
 	
 	attemptTest(String s)
 	{
@@ -67,17 +70,17 @@ public class attemptTest extends JFrame implements ActionListener{
 		{
 			ex.printStackTrace();
 		}
-		i = Integer.parseInt(line)*60;
+		timei = Integer.parseInt(line)*60;
 	    
-		Timer timer = new Timer();
+		timer = new Timer();
 		TimerTask task = new TimerTask() {
 			
 			public void run() {
-				if(i>=0)
+				if(timei>=0)
 				{
-					String p = String.format("%02d:%02d", i / 60, i % 60);
+					String p = String.format("%02d:%02d", timei / 60, timei % 60);
 					time.setText("Remaining Time: "+p);
-					i--;
+					timei--;
 				}
 				else
 				{
@@ -138,6 +141,10 @@ public class attemptTest extends JFrame implements ActionListener{
 	    questionLabel = new JLabel("Question");
 	    questionLabel.setBounds(30, 33, 103, 13);
 	    getContentPane().add(questionLabel);
+	    
+	    qtype = new JLabel("New label");
+	    qtype.setBounds(326, 33, 142, 13);
+	    getContentPane().add(qtype);
 	    set();  
 	    
 	    
@@ -164,6 +171,8 @@ public class attemptTest extends JFrame implements ActionListener{
 	    setLocation(250,100);  
 	    setVisible(true);  
 	    setSize(770,405);  
+	    
+	    
 	    
 	    userLabel.setText("User: "+s);
 	    
@@ -209,6 +218,7 @@ public class attemptTest extends JFrame implements ActionListener{
 	    });
 	    btnNewButton_1.setBounds(326, 261, 124, 21);
 	    getContentPane().add(btnNewButton_1);
+	    
 	    
 
 	}
@@ -256,6 +266,7 @@ public class attemptTest extends JFrame implements ActionListener{
       
         if(e.getActionCommand().equals("Submit"))  
         {  
+        	timer.cancel();
             check();  
             length=0;
             EventQueue.invokeLater(new Runnable() {
@@ -310,6 +321,18 @@ public class attemptTest extends JFrame implements ActionListener{
     	{
     		prev.setEnabled(false);
     	}
+		if(type.get(current).equals("1"))
+		{
+			qtype.setText("Type: Easy(+3/-1)");
+		}
+		if(type.get(current).equals("2"))
+		{
+			qtype.setText("Type: Tough(+4/-1)");
+		}
+		if(type.get(current).equals("3"))
+		{
+			qtype.setText("Type: Complex(+5/-1)");
+		}
 	}  	
 	
 	void check() 
@@ -354,6 +377,24 @@ public class attemptTest extends JFrame implements ActionListener{
 				}
 			}
 			responses = new String[length];
+			
+			fr.close(); 
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		try
+		{
+			FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			type = new Vector<String>();
+			while((line=br.readLine())!=null)  
+			{  
+				type.add(line);
+			}
 			
 			fr.close(); 
 		}

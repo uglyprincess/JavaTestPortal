@@ -29,6 +29,8 @@ public class resultWindow extends JFrame {
 	private JButton btnNewButton;
 	private Vector<String> data;
 	private JLabel verdict;
+	private Vector<String> type;
+	private JLabel typeLabel;
 
 	/**
 	 * Launch the application.
@@ -154,7 +156,22 @@ public class resultWindow extends JFrame {
 		{
 			ex.printStackTrace();
 		}
-		
+		try
+		{
+			type = new Vector<String>();
+			FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			while((line=br.readLine())!=null)  
+			{
+				type.add(line);
+			}
+			fr.close(); 
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
 		for(int i=0;i<responses.size();i++)
 		{
 			studentResponse = responses.get(i).split("_");
@@ -163,12 +180,36 @@ public class resultWindow extends JFrame {
 				break;
 			}
 		}
+		int totalmarks=0,e=0,t=0,c=0;
 		for(int i=0;i<questions.size();i++)
 		{
-			correct = questions.get(i).split("_");
-			if(correct[0].equals(studentResponse[i+1]))
+			if(type.get(i).equals("1"))
 			{
+				totalmarks+=3;
+			}
+			if(type.get(i).equals("2"))
+			{
+				totalmarks+=4;
+			}
+			if(type.get(i).equals("3"))
+			{
+				totalmarks+=5;
+			}
+			correct = questions.get(i).split("_");
+			if(correct[0].equals(studentResponse[i+1]) && type.get(i).equals("1"))
+			{
+				e++;
+				mark+=3;
+			}
+			else if(correct[0].equals(studentResponse[i+1]) && type.get(i).equals("2"))
+			{
+				t++;
 				mark+=4;
+			}
+			else if(correct[0].equals(studentResponse[i+1]) && type.get(i).equals("3"))
+			{
+				c++;
+				mark+=5;
 			}
 			else if(studentResponse[i+1].equals("null"))
 			{
@@ -180,7 +221,7 @@ public class resultWindow extends JFrame {
 			}
 		}
 		score.setText("Score: "+mark);
-		total.setText("Total: "+ (questions.size()*4));
+		total.setText("Total: "+ totalmarks);
 		try
 		{
 			data = new Vector<String>();
@@ -220,6 +261,16 @@ public class resultWindow extends JFrame {
 			{
 				JOptionPane.showMessageDialog(null,ex+"");
 			}
+			try
+			{
+				fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/typeCorrect.txt",true);
+				fw.write(username+"_"+e+"_"+t+"_"+c+"\n");
+				fw.close();
+			}
+			catch(Exception ex)
+			{
+				JOptionPane.showMessageDialog(null,ex+"");
+			}
 		}
 		
 		btnNewButton = new JButton("Exit");
@@ -234,10 +285,26 @@ public class resultWindow extends JFrame {
 		verdict = new JLabel("verdict");
 		verdict.setBounds(10, 283, 138, 13);
 		contentPane.add(verdict);
+		
+		typeLabel = new JLabel("New label");
+		typeLabel.setBounds(10, 80, 147, 13);
+		contentPane.add(typeLabel);
 		set();
 	}
 	void set()
 	{
+		if(type.get(current).equals("1"))
+		{
+			typeLabel.setText("Question Type: Easy");
+		}
+		else if(type.get(current).equals("2"))
+		{
+			typeLabel.setText("Question Type: Tough");
+		}
+		else if(type.get(current).equals("3"))
+		{
+			typeLabel.setText("Question Type: Complex");
+		}
 		correct = questions.get(current).split("_");
 		question.setText("Question "+(current+1)+": "+correct[2]);
 		A.setText("A. "+correct[3]);
@@ -246,9 +313,17 @@ public class resultWindow extends JFrame {
 		D.setText("D. "+correct[6]);
 		answer.setText("Correct Option: "+correct[0]);
 		selected.setText("Selected Option: "+studentResponse[current+1]);
-		if(correct[0].equals(studentResponse[current+1]))
+		if(correct[0].equals(studentResponse[current+1]) && type.get(current).equals("1"))
+		{
+			verdict.setText("Verdict: Correct(+3)");
+		}
+		else if(correct[0].equals(studentResponse[current+1]) && type.get(current).equals("2"))
 		{
 			verdict.setText("Verdict: Correct(+4)");
+		}
+		else if(correct[0].equals(studentResponse[current+1]) && type.get(current).equals("3"))
+		{
+			verdict.setText("Verdict: Correct(+5)");
 		}
 		else if (studentResponse[current+1].equals("null"))
 		{

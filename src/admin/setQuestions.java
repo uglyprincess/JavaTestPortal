@@ -30,6 +30,7 @@ public class setQuestions extends JFrame {
 	private JTextField optionD;
 	public int qid = 1;
 	public String sel;
+	protected int typeSel;
 
 	/**
 	 * Launch the application.
@@ -84,6 +85,27 @@ public class setQuestions extends JFrame {
 		lblNewLabel_1.setText("Question "+qid);
 		JButton btnNewButton = new JButton("Finish");
 		
+		JRadioButton easy = new JRadioButton("Easy");
+		easy.setBounds(20, 317, 103, 21);
+		contentPane.add(easy);
+		
+		JRadioButton tough = new JRadioButton("Tough");
+		tough.setBounds(125, 317, 103, 21);
+		contentPane.add(tough);
+		
+		JRadioButton complex = new JRadioButton("Complex");
+		complex.setBounds(230, 317, 103, 21);
+		contentPane.add(complex);
+		
+		JLabel lblNewLabel_2 = new JLabel("Question Type:");
+		lblNewLabel_2.setBounds(20, 301, 129, 13);
+		contentPane.add(lblNewLabel_2);
+		
+		ButtonGroup btngrp = new ButtonGroup();
+		btngrp.add(easy);
+		btngrp.add(tough);
+		btngrp.add(complex);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(A.isSelected())
@@ -107,6 +129,28 @@ public class setQuestions extends JFrame {
 				{
 					fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/testQuestions.txt",true);
 					fw.write(sel+"_"+qid+"_"+question.getText()+"_"+optionA.getText()+"_"+optionB.getText()+"_"+optionC.getText()+"_"+optionD.getText()+"\n");
+					fw.close();
+				}
+				catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null,ex+"");
+				}
+				if(easy.isSelected())
+				{
+					typeSel=1;
+				}
+				if(tough.isSelected())
+				{
+					typeSel=2;
+				}
+				if(complex.isSelected())
+				{
+					typeSel=3;
+				}
+				try
+				{
+					fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt",true);
+					fw.write(typeSel+"\n");
 					fw.close();
 				}
 				catch(Exception ex)
@@ -159,6 +203,28 @@ public class setQuestions extends JFrame {
 				{
 					JOptionPane.showMessageDialog(null,ex+"");
 				}
+				if(easy.isSelected())
+				{
+					typeSel=1;
+				}
+				if(tough.isSelected())
+				{
+					typeSel=2;
+				}
+				if(complex.isSelected())
+				{
+					typeSel=3;
+				}
+				try
+				{
+					fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt",true);
+					fw.write(typeSel+"\n");
+					fw.close();
+				}
+				catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null,ex+"");
+				}
 				qid++;
 				lblNewLabel_1.setText("Question "+qid);
 				question.setText(null);
@@ -167,6 +233,7 @@ public class setQuestions extends JFrame {
 				optionC.setText(null);
 				optionD.setText(null);
 				group.clearSelection();
+				btngrp.clearSelection();
 			}
 		});
 		btnNewButton_1.setBounds(430, 227, 85, 21);
@@ -196,5 +263,7 @@ public class setQuestions extends JFrame {
 		optionD.setBounds(72, 261, 96, 19);
 		contentPane.add(optionD);
 		optionD.setColumns(10);
+		
+		
 	}
 }

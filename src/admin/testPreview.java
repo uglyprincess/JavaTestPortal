@@ -37,6 +37,8 @@ public class testPreview extends JFrame {
 	private JTextField D;
 	private JTextField answer;
 	Vector<String> data;
+	private JTextField typeText;
+	Vector<String> type;
 
 	/**
 	 * Launch the application.
@@ -88,7 +90,7 @@ public class testPreview extends JFrame {
 		optionD.setBounds(10, 216, 45, 13);
 		contentPane.add(optionD);
 		
-		JLabel answerLabel = new JLabel("answer");
+		JLabel answerLabel = new JLabel("Answer");
 		answerLabel.setBounds(10, 268, 85, 13);
 		contentPane.add(answerLabel);
 		
@@ -113,9 +115,14 @@ public class testPreview extends JFrame {
 		D.setColumns(10);
 		
 		answer = new JTextField();
-		answer.setBounds(106, 265, 96, 19);
+		answer.setBounds(105, 265, 96, 19);
 		contentPane.add(answer);
 		answer.setColumns(10);
+		
+		typeText = new JTextField();
+		typeText.setBounds(282, 265, 96, 19);
+		contentPane.add(typeText);
+		typeText.setColumns(10);
 		
 		JButton next = new JButton("Next");
 		next.addActionListener(new ActionListener() {
@@ -151,6 +158,25 @@ public class testPreview extends JFrame {
 						fr.close(); 
 					}
 					
+				}
+				catch (IOException ex)
+				{
+					ex.printStackTrace();
+				}
+				try
+				{
+					FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+					BufferedReader br = new BufferedReader(fr);
+					String line;
+					for(int i=0;i<skip;i++)
+					{
+						br.readLine();
+					}
+					line = br.readLine();
+					
+					typeText.setText(line); 
+					
+					fr.close(); 
 				}
 				catch (IOException ex)
 				{
@@ -203,6 +229,26 @@ public class testPreview extends JFrame {
 		}
 		
 		
+		try
+		{
+			FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+			BufferedReader br = new BufferedReader(fr);
+			String line;
+			for(int i=0;i<skip;i++)
+			{
+				br.readLine();
+			}
+			line = br.readLine();
+			
+			typeText.setText(line); 
+			
+			fr.close(); 
+		}
+		catch (IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		
 		JButton previous = new JButton("Previous");
 		previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -242,6 +288,25 @@ public class testPreview extends JFrame {
 							fr.close(); 
 						}
 						
+					}
+					catch (IOException ex)
+					{
+						ex.printStackTrace();
+					}
+					try
+					{
+						FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+						BufferedReader br = new BufferedReader(fr);
+						String line;
+						for(int i=0;i<skip;i++)
+						{
+							br.readLine();
+						}
+						line = br.readLine();
+						
+						typeText.setText(line); 
+						
+						fr.close(); 
 					}
 					catch (IOException ex)
 					{
@@ -294,7 +359,38 @@ public class testPreview extends JFrame {
 				{
 					ex.printStackTrace();
 				}
+				try
+				{
+					type = new Vector<String>();
+					FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+					BufferedReader br = new BufferedReader(fr);
+					String line;
+					while((line=br.readLine())!=null)  
+					{
+						type.add(line);
+					}
+					type.set(skip, typeText.getText());
+					fr.close(); 
+				}
+				catch (IOException ex)
+				{
+					ex.printStackTrace();
+				}
 				FileWriter fw;
+				try
+				{
+					fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+					for(int i=0;i<type.size();i++)
+					{
+						fw.write(type.get(i)+"\n");
+					}
+					
+					fw.close();
+				}
+				catch(Exception ex)
+				{
+					JOptionPane.showMessageDialog(null,ex+"");
+				}
 				try
 				{
 					fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/testQuestions.txt");
@@ -314,6 +410,12 @@ public class testPreview extends JFrame {
 		});
 		save.setBounds(366, 189, 123, 21);
 		contentPane.add(save);
+		
+		JLabel lblNewLabel_1 = new JLabel("Type");
+		lblNewLabel_1.setBounds(245, 268, 45, 13);
+		contentPane.add(lblNewLabel_1);
+		
+		
 		
 		
 		

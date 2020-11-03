@@ -116,12 +116,32 @@ public class adminHome extends JFrame {
 				{
 					q.printStackTrace();
 				}
+				try
+				{
+					PrintWriter writer = new PrintWriter("C:/Users/Anirudh/Desktop/OOM-project/typeQuestions.txt");
+					writer.print("");
+					writer.close();
+				}
+				catch(Exception q)
+				{
+					q.printStackTrace();
+				}
 				String time;
 				time = JOptionPane.showInputDialog("Enter the total time for test(In Minutes)");
 				try
 				{
 					PrintWriter writer = new PrintWriter("C:/Users/Anirudh/Desktop/OOM-project/testTime.txt");
 					writer.print(time);
+					writer.close();
+				}
+				catch(Exception q)
+				{
+					q.printStackTrace();
+				}
+				try
+				{
+					PrintWriter writer = new PrintWriter("C:/Users/Anirudh/Desktop/OOM-project/typeCorrect.txt");
+					writer.print("");
 					writer.close();
 				}
 				catch(Exception q)
