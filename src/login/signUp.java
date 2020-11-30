@@ -57,13 +57,14 @@ public class signUp implements ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.setLocationRelativeTo(null);
 		
-		JLabel lblNewLabel = new JLabel("New User");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		lblNewLabel.setBounds(165, 10, 92, 26);
+		JLabel lblNewLabel = new JLabel("NEW USER");
+		lblNewLabel.setFont(new Font("Century Gothic", Font.PLAIN, 21));
+		lblNewLabel.setBounds(165, 10, 120, 26);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Username");
@@ -105,7 +106,7 @@ public class signUp implements ActionListener{
 				try
 				{
 					data = new Vector<String>();
-					FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/loginData.txt");
+					FileReader fr = new FileReader("D:/Java/onlineTest/loginData.txt");
 					BufferedReader br = new BufferedReader(fr);
 					String line;
 					while((line=br.readLine())!=null)  
@@ -134,7 +135,7 @@ public class signUp implements ActionListener{
 					FileWriter fw;
 					try
 					{
-						fw = new FileWriter("C:/Users/Anirudh/Desktop/OOM-project/loginData.txt",true);
+						fw = new FileWriter("D:/Java/onlineTest/loginData.txt",true);
 						fw.write(textField.getText()+"_"+passwordField.getText()+"\n");
 						fw.close();
 						JOptionPane.showMessageDialog(null,"Signup Successfull!");

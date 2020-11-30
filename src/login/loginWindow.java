@@ -13,6 +13,8 @@ import java.io.File;
 import java.awt.EventQueue;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -67,45 +69,44 @@ public class loginWindow  {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 433, 292);
+		frame.setBounds(100, 100, 1500, 1000);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("ONLINE TEST PORTAL");
-		lblNewLabel.setBounds(117, 10, 214, 27);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblNewLabel.setBounds(525, 100, 900, 50);
+		lblNewLabel.setFont(new Font("Century Gothic", Font.PLAIN, 50));
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("USERNAME");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(23, 69, 105, 27);
+		lblNewLabel_1.setBounds(500, 300, 105, 27);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("PASSWORD");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNewLabel_2.setBounds(23, 133, 106, 13);
+		lblNewLabel_2.setBounds(500, 350, 106, 13);
 		frame.getContentPane().add(lblNewLabel_2);
 		
 		username = new JTextField();
-		username.setBounds(138, 69, 264, 26);
+		username.setBounds(650,300, 264, 26);
 		frame.getContentPane().add(username);
 		username.setColumns(10);
 		
-		
 		password = new JPasswordField();
-		password.setBounds(139, 125, 263, 27);
+		password.setBounds(650, 350, 263, 27);
 		frame.getContentPane().add(password);
 		
-		JButton exitButton = new JButton("Exit");
-		exitButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frame.dispose();
-			}
-		});
-		exitButton.setBounds(23, 221, 85, 21);
-		frame.getContentPane().add(exitButton);
-		
+//		JButton exitButton = new JButton("Exit");
+//		exitButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				frame.dispose();
+//			}
+//		});
+//		exitButton.setBounds(23, 221, 85, 21);
+//		frame.getContentPane().add(exitButton);
 		
 		JButton loginButton = new JButton("Login");
 		loginButton.addActionListener(new ActionListener() {
@@ -129,7 +130,7 @@ public class loginWindow  {
 					try
 					{
 						data = new HashSet<String>();
-						FileReader fr = new FileReader("C:/Users/Anirudh/Desktop/OOM-project/loginData.txt");
+						FileReader fr = new FileReader("D:/Java/onlineTest/JloginData.txt");
 						BufferedReader br = new BufferedReader(fr);
 						String line;
 						while((line=br.readLine())!=null)  
@@ -168,29 +169,29 @@ public class loginWindow  {
 				
 			}
 		});
-		loginButton.setBounds(317, 162, 85, 21);
+		loginButton.setBounds(665, 450, 100, 30);
 		frame.getContentPane().add(loginButton);
 		
 		
 		
 		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(23, 47, 379, 2);
-		frame.getContentPane().add(separator);
+//		JSeparator separator = new JSeparator();
+//		separator.setBounds(23, 47, 379, 2);
+//		frame.getContentPane().add(separator);
+//		
+//		JSeparator separator_1 = new JSeparator();
+//		separator_1.setBounds(23, 192, 379, 2);
+//		frame.getContentPane().add(separator_1);
 		
-		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(23, 192, 379, 2);
-		frame.getContentPane().add(separator_1);
-		
-		JButton resetButton = new JButton("Reset");
-		resetButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				username.setText(null);
-				password.setText(null);
-			}
-		});
-		resetButton.setBounds(222, 162, 85, 21);
-		frame.getContentPane().add(resetButton);
+//		JButton resetButton = new JButton("Reset");
+//		resetButton.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				username.setText(null);
+//				password.setText(null);
+//			}
+//		});
+//		resetButton.setBounds(222, 162, 85, 21);
+//		frame.getContentPane().add(resetButton);
 		
 		JButton signUp = new JButton("Sign Up");
 		signUp.addActionListener(new ActionListener() {
@@ -207,11 +208,11 @@ public class loginWindow  {
 				});
 			}
 		});
-		signUp.setBounds(317, 221, 85, 21);
+		signUp.setBounds(790, 450, 100, 30);
 		frame.getContentPane().add(signUp);
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Show Password");
-		chckbxNewCheckBox.setBounds(23, 162, 121, 21);
+		chckbxNewCheckBox.setBounds(930, 350, 121, 21);
 		frame.getContentPane().add(chckbxNewCheckBox);
 		chckbxNewCheckBox.addItemListener(new ItemListener() {
 		    public void itemStateChanged(ItemEvent e) {

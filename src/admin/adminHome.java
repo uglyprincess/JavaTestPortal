@@ -47,6 +47,7 @@ public class adminHome extends JFrame {
 		JLabel lblNewLabel = new JLabel("Admin Home");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblNewLabel.setBounds(166, 10, 124, 26);
+		setLocationRelativeTo(null);
 		contentPane.add(lblNewLabel);
 		
 		JSeparator separator = new JSeparator();
